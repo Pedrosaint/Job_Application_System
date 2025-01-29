@@ -6,6 +6,9 @@ import Layout from "./Pages/Layout";
 import ForgotPassword from "./Pages/ForgotPassword";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Dashboard from "./Components/Dashboard/Dashboard";
+import JobApp from "./Components/JobApp/JobApp";
+import Settings from "./Components/Settings/Settings";
 
 
 
@@ -27,7 +30,9 @@ const App: React.FC = () => {
               </ProtectedRoute>
             }
           >
-          
+            <Route index element={<Dashboard />} />
+            <Route path="/job" element={<JobApp />} />
+            <Route path="/settings" element={<Settings />} />
           </Route>
 
           {/* Redirect unknown routes to Login */}

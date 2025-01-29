@@ -83,7 +83,7 @@ const Login: React.FC = () => {
             muted
             className="inset-0 w-full h-full object-cover transform rounded-br-full rounded-tr-full"
           />
-          <p className="text-xl font-extrabold font-serif text-[#0bfb53] bg-green-800 rounded-2xl p-2 m-2 absolute bottom-8 left-1">
+          <p className="text-xl font-extrabold font-serif text-[#fff] bg-green-800 rounded-2xl p-2 m-2 absolute bottom-8 left-1">
             <Typewriter
               words={["Welcome to our Job Application System."]}
               loop={Infinity}
