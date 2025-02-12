@@ -26,6 +26,7 @@ const Layout: React.FC = () => {
         <Sidebar
           user={{
             name: user.displayName || "User",
+            email:user.email || "User",
             profilePicture: user.photoURL || "",
           }}
           isMobileSidebarOpen={isMobileSidebarOpen}
@@ -38,11 +39,11 @@ const Layout: React.FC = () => {
         {/* Sticky Header */}
         <Header
           setIsMobileSidebarOpen={setIsMobileSidebarOpen}
-          isSidebarCollapsed
+          isSidebarCollapsed={true}
         />
 
         {/* Main Content */}
-        <main className="flex-1 p-6 bg-gray-100 overflow-y-auto">
+        <main className="flex-1 p-6 bg-[#e7e4e475] overflow-y-auto">
           <Outlet />
         </main>
       </div>
@@ -51,3 +52,17 @@ const Layout: React.FC = () => {
 };
 
 export default Layout;
+
+// import React, { useState } from 'react'
+
+// const Layout: React.FC = () => {
+//   const [count, setCount] = useState(0);
+//   return (
+//     <div>
+//       <p>Count= {count}</p>
+//       <button onClick={() => setCount(count + 1) }>Increase</button>
+//     </div>
+//   )
+// }
+
+// export default Layout

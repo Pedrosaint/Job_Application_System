@@ -1,44 +1,59 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import ProtectedRoute from "./Common/ProtectedRoute"; // Import Protected Route
-import Login from "./Pages/Login";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import ProtectedRoute from "./Common/ProtectedRoute";
 import Layout from "./Pages/Layout";
+import Login from "./Pages/Login";
 import ForgotPassword from "./Pages/ForgotPassword";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import JobApp from "./Components/JobApp/JobApp";
 import Settings from "./Components/Settings/Settings";
+import { ToastContainer } from "react-toastify";
+import InviteTM from "./Components/Settings/InviteTM";
+import AddComapnyLocation from "./Components/Settings/AddComapnyLocation";
+import JopPosting from "./Components/Settings/JopPosting";
+import CareersPage from "./Components/Settings/CareersPage";
 
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      {/* Redirect root path `/` to `/login` */}
+      <Route path="/" element={<Navigate to="/login" />} />
+
+      {/* Public Routes */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/reset" element={<ForgotPassword />} />
+
+      {/* Protected Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="job" element={<JobApp />} />
+          {/*--------- Nexted Route --------*/}
+          <Route path="settings" element={<Settings />}>
+            <Route path="user" element={<InviteTM />} />
+            <Route path="location" element={<AddComapnyLocation />} />
+            <Route path="jobposting" element={<JopPosting />} />
+            <Route path="careerspage" element={<CareersPage />} />
+          </Route>
+        </Route>
+      </Route>
+
+      {/* Redirect unknown routes to Login */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
+    </>
+  )
+);
 
 
 const App: React.FC = () => {
   return (
     <>
-      <Router>
-        <Routes>
-          {/* Public Route */}
-          <Route path="/login" element={<Login />} />
-          <Route path="/reset" element={<ForgotPassword />} />
-
-          {/* Protected Route */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Dashboard />} />
-            <Route path="/job" element={<JobApp />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route>
-
-          {/* Redirect unknown routes to Login */}
-          <Route path="*" element={<Navigate to="/login" />} />
-        </Routes>
-      </Router>
+      <RouterProvider router={router} />
       <ToastContainer />
     </>
   );

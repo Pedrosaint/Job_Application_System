@@ -200,3 +200,20 @@
 .form input:focus{
     border-color: green;
 }
+
+/*--------------DarkMode------------*/
+:root {
+  --bg-color: white;
+  --text-color: black;
+}
+
+.dark {
+  --bg-color: #181818;
+  --text-color: white;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
