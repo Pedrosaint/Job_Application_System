@@ -1,9 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import { FaSearch } from "react-icons/fa";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { HiMenu } from "react-icons/hi";
 import { RiShareBoxFill } from "react-icons/ri";
 import { IoMdAdd } from "react-icons/io";
+import { Link } from "react-router-dom";
+import { SlBriefcase, SlCalender } from "react-icons/sl";
+import { IoPersonOutline } from "react-icons/io5";
 
 interface HeaderProps {
   setIsMobileSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +17,7 @@ const Header: React.FC<HeaderProps> = ({
   setIsMobileSidebarOpen,
   isSidebarCollapsed,
 }) => {
+    const [isOpen, setIsOpen] = useState(false);
   return (
     <div
       className="sticky top-0 left-0 right-0 h-16 flex items-center justify-between 
@@ -51,10 +55,61 @@ const Header: React.FC<HeaderProps> = ({
           <RiShareBoxFill size={20} />
           <span className="ml-2 hidden sm:block">View Career Page</span>
         </button>
-        <button className="flex items-center bg-[#150d51] text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium">
+
+        <button
+          className="flex items-center bg-[#150d51] text-white px-3 md:px-4 py-2 rounded-md text-sm font-medium relative"
+          onMouseEnter={() => setIsOpen(true)}
+          onMouseLeave={() => setIsOpen(true)}
+        >
           <IoMdAdd size={20} />
           <span className="ml-2 hidden sm:block">New</span>
         </button>
+
+        {/* Dropdown */}
+        {isOpen && (
+          <div
+            className="absolute mt-52 w-48 bg-white border border-gray-100 rounded-md shadow-lg"
+            onMouseEnter={() => setIsOpen(true)}
+            onMouseLeave={() => setIsOpen(false)}
+          >
+            <ul className="">
+              <li>
+                <Link
+                  to="/job/job-opening"
+                  className="block px-4 py-2 text-gray-700 hover:text-white hover:bg-[#150d51] hover:rounded-t-md"
+                >
+                  <div className="flex">
+                    <SlBriefcase  size={20} color="gray"/>
+                    <span className="ml-2">Job Opening</span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/applicant"
+                  className="block px-4 py-2 text-gray-700 hover:text-white hover:bg-[#150d51]"
+                >
+                  <div className="flex">
+                    <IoPersonOutline size={20} color="gray"/>
+                    <span className="ml-2">Applicant</span>
+                  </div>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/interview"
+                  className="block px-4 py-2 text-gray-700 hover:text-white hover:bg-[#150d51] hover:rounded-b-md"
+                >
+                  <div className="flex">
+                    <SlCalender size={20} color="gray" />
+                    <span className="ml-2">Interview</span>
+                  </div>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        )}
+
         <IoNotificationsOutline
           size={24}
           className="text-gray-600 cursor-pointer"

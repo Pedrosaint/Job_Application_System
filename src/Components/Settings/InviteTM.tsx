@@ -104,7 +104,7 @@ const InviteTM: React.FC = () => {
                   <ListboxButton className="border border-gray-300 p-2 rounded-sm w-full outline-none bg-white text-left">
                     {selectedRole}
                   </ListboxButton>
-                  <ListboxOptions className="absolute w-full mt-2 bg-white shadow-md rounded-md overflow-hidden">
+                  <ListboxOptions className="absolute w-full mt-2 bg-gray-100 shadow-md rounded-md overflow-hidden">
                     {roles.map((role, index) => (
                       <ListboxOption
                         key={index}

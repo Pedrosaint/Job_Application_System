@@ -17,6 +17,7 @@ import InviteTM from "./Components/Settings/InviteTM";
 import AddComapnyLocation from "./Components/Settings/AddComapnyLocation";
 import JopPosting from "./Components/Settings/JopPosting";
 import CareersPage from "./Components/Settings/CareersPage";
+import JopOpening from "./Components/JobApp/JobOpening/JopOpening";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +33,12 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />}>
         <Route path="/" element={<Layout />}>
           <Route index element={<Dashboard />} />
-          <Route path="job" element={<JobApp />} />
+
+          {/*--------- Nexted Route --------*/}
+          <Route path="job" element={<JobApp />}>
+            <Route path="job-opening" element={<JopOpening />} />
+          </Route>
+
           {/*--------- Nexted Route --------*/}
           <Route path="settings" element={<Settings />}>
             <Route path="user" element={<InviteTM />} />
@@ -48,7 +54,6 @@ const router = createBrowserRouter(
     </>
   )
 );
-
 
 const App: React.FC = () => {
   return (

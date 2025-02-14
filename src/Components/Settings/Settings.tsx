@@ -6,14 +6,14 @@ const Settings: React.FC = () => {
   const pathParts = location.pathname.split("/").filter(Boolean);
 
   // Check if the current path is exactly "/settings"
-  const isOnlySettings = location.pathname === "/settings";
+  const isOnlySettings = location.pathname ===  "/settings";
 
   return (
     <div>
       {/* Breadcrumb Navigation */}
       <div className="bg-blue-500 p-2 text-white text-md font-semibold indent-5 font-serif">
         {!isOnlySettings && ( // Hide "Dashboard" if on /settings
-          <Link to="/dashboard" className="text-gray-200 hover:underline">
+          <Link to="/" className="text-gray-200 hover:underline">
             Dashboard
           </Link>
         )}

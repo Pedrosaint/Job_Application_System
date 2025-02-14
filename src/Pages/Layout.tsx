@@ -43,7 +43,7 @@ const Layout: React.FC = () => {
         />
 
         {/* Main Content */}
-        <main className="flex-1 p-6 bg-[#e7e4e475] overflow-y-auto">
+        <main className="flex-1 p-6 bg-[#d8caca75] overflow-y-auto">
           <Outlet />
         </main>
       </div>
