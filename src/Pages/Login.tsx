@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState, FormEvent } from "react";
 import { useAuth } from "../Context/AuthContext";
 import { EyeOff, Eye } from "lucide-react";

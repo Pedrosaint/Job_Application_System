@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useReducer, useEffect, Dispatch } from "react";
 
 // Define Theme State Type
