@@ -124,6 +124,9 @@ import { motion } from "framer-motion";
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../Context/AuthContext"; // ✅ Use your AuthContext instead
+import { useState } from "react";
+import AccountComp from "./components/Account.comp";
+import PrivacyComp from "./components/Privacy.comp";
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -142,7 +145,10 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
   user,
 }) => {
   const navigate = useNavigate();
-  const { logout } = useAuth(); // ✅ grab logout from context
+  const { logout } = useAuth(); // grab logout from context
+   const [activeTab, setActiveTab] = useState<
+     "general" | "account" | "privacy"
+   >("general");
 
   const handleLogout = async () => {
     try {
@@ -174,11 +180,23 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
             Profile
           </h3>
           <ul className="space-y-3">
-            <li className="p-2 rounded-lg bg-gray-200">General</li>
+            <li
+              className={`p-2 rounded-lg cursor-pointer ${
+                activeTab === "general" ? "bg-gray-200" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setActiveTab("general")}
+            >
+              General
+            </li>
             <li className="p-2 rounded-lg hover:bg-gray-200 cursor-pointer">
               Account
             </li>
-            <li className="p-2 rounded-lg hover:bg-gray-200 cursor-pointer">
+            <li
+              className={`p-2 rounded-lg cursor-pointer ${
+                activeTab === "privacy" ? "bg-gray-200" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setActiveTab("privacy")}
+            >
               Privacy
             </li>
             <li className="p-2 rounded-lg hover:bg-gray-200 cursor-pointer">
@@ -202,33 +220,39 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
             &times;
           </button>
 
-          <div className="flex flex-col items-center">
-            {user.profilePicture ? (
-              <img
-                src={user.profilePicture}
-                alt="Profile"
-                className="w-10 h-10 rounded-full"
-              />
-            ) : (
-              <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-xl">
-                {user.name.charAt(0)}
-              </div>
-            )}
+          {/* Conditional Rendering */}
+          {activeTab === "general" && (
+            <div className="flex flex-col items-center">
+              {user.profilePicture ? (
+                <img
+                  src={user.profilePicture}
+                  alt="Profile"
+                  className="w-10 h-10 rounded-full"
+                />
+              ) : (
+                <div className="w-10 h-10 bg-gray-300 rounded-full flex items-center justify-center text-xl">
+                  {user.name.charAt(0)}
+                </div>
+              )}
 
-            <h2 className="text-xl font-bold mt-3">{user.name}</h2>
-            <p className="text-gray-600">
-              {user.email || "No email available"}
-            </p>
-            <p className="text-gray-700 font-semibold mt-2">{user.phone}</p>
+              <h2 className="text-xl font-bold mt-3">{user.name}</h2>
+              <p className="text-gray-600">
+                {user.email || "No email available"}
+              </p>
+              <p className="text-gray-700 font-semibold mt-2">{user.phone}</p>
 
-            <button
-              className="flex mt-6 items-center gap-2 bg-gray-100 text-red-700 py-2 px-6 rounded-md shadow-xl hover:bg-red-100"
-              onClick={handleLogout}
-            >
-              <LogOut size={20} color="red" />
-              Log out
-            </button>
-          </div>
+              <button
+                className="flex mt-6 items-center gap-2 bg-gray-100 text-red-700 py-2 px-6 rounded-md shadow-xl hover:bg-red-100"
+                onClick={handleLogout}
+              >
+                <LogOut size={20} color="red" />
+                Log out
+              </button>
+            </div>
+          )}
+
+          {activeTab === "account" && <AccountComp />}
+          {activeTab === "privacy" && <PrivacyComp />}
         </div>
       </motion.div>
     </div>
