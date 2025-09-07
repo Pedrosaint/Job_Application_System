@@ -115,11 +115,6 @@
 
 // export default ProfileModal;
 
-
-
-
-
-
 import { motion } from "framer-motion";
 import { LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -146,9 +141,9 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
 }) => {
   const navigate = useNavigate();
   const { logout } = useAuth(); // grab logout from context
-   const [activeTab, setActiveTab] = useState<
-     "general" | "account" | "privacy"
-   >("general");
+  const [activeTab, setActiveTab] = useState<"general" | "account" | "privacy">(
+    "general"
+  );
 
   const handleLogout = async () => {
     try {
@@ -188,7 +183,12 @@ const ProfileModal: React.FC<ProfileModalProps> = ({
             >
               General
             </li>
-            <li className="p-2 rounded-lg hover:bg-gray-200 cursor-pointer">
+            <li
+              className={`p-2 rounded-lg cursor-pointer ${
+                activeTab === "account" ? "bg-gray-200" : "hover:bg-gray-200"
+              }`}
+              onClick={() => setActiveTab("account")}
+            >
               Account
             </li>
             <li
